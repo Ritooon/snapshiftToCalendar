@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="librairies/bootstrap-5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/snapshift2csv.css" rel="stylesheet">
+    <title>Snapshift to Calendar</title>
+</head>
+<body>
+
+    <div Class="container">
+        <h1>Snapshift to Calendar</h1>
+        <h5>Importez un fichier de présence mensuelle en provenance de Snapshift pour le transfomrer en fichier importable dans un calendrier (Fichier .ics)</h5>
+    </div>
+
+    <br/>
+    <hr />
+    <br />
+
+    <!-- a container for the output -->
+    <div class="container" id="import-container">
+        <div class="file-drop-area">
+            <span class="choose-file-button">Choisir un fichier</span>
+            <span class="file-message">ou le glisser ici</span>
+            <input class="file-input" type="file" id="file-id" name="file_name" onchange="ExtractText();">
+        </div>
+    </div>
+    <div class="container">
+        <h5 id="company-title">Société : <span id="company-name"></span></h5>
+        <table id="table" class="table table-stripped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Employé</th>
+                    <th>Résumé évènements</th>
+                    <th>Fichier calendrier</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</body>
+
+<footer>
+    <script src="librairies/jquery/jquery-3.6.0.min.js"></script>
+    <script src="librairies/bootstrap-5.1.3/js/bootstrap.min.js""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/1.10.100/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.worker.entry.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/1.10.100/pdf.worker.min.js"></script>
+    <script src="librairies/momentjs/moment.js"></script>
+    <script src="librairies/ics.js/ics.min.js"></script>
+    <script src="assets/js/snapshift2cal.js?v=2"></script>
+</footer>
+
+</html>
