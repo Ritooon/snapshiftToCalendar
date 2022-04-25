@@ -37,7 +37,11 @@ function convertDataURIToBinary(dataURI) {
 
 function downloadCalendar(index)
 {
-    let cal = ics();
+    let nDate = new Date();
+    let eventUID = nDate.getTime();
+
+    let cal = ics(eventUID);
+       
 
     if(typeof employeesPlanning[index] != 'undefined') {
         let events = employeesPlanning[index].events;
@@ -91,14 +95,16 @@ function getPageText(pageNum, PDFDocumentInstance) {
                                 }
 
                                 if(start.isValid() && end.isValid()) {
-                                    employeesPlanning[employeeIndex]['events'].push(
-                                        {
-                                            'start' : start, 
-                                            'end': end,
-                                            'pause': pause
-                                        }
-                                    );
-                                    $prevIsHours = true;
+                                    if(typeof employeesPlanning[employeeIndex] != 'undefined') {
+                                        employeesPlanning[employeeIndex]['events'].push(
+                                            {
+                                                'start' : start, 
+                                                'end': end,
+                                                'pause': pause
+                                            }
+                                        );
+                                        $prevIsHours = true;
+                                    }
                                 }
                                 
                                 $isWeekDay = false;
