@@ -20,7 +20,6 @@ function ExtractText() {
 var BASE64_MARKER = ';base64,';
 
 function convertDataURIToBinary(dataURI) {
-
     var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
     var base64 = dataURI.substring(base64Index);
     var raw = window.atob(base64);
@@ -31,28 +30,30 @@ function convertDataURIToBinary(dataURI) {
         array[i] = raw.charCodeAt(i);
     }
     pdfAsArray(array)
-
 }
 
 
 function downloadCalendar(index)
 {
-    let nDate = new Date();
-    let eventUID = nDate.getTime();
-
-    let cal = ics(eventUID);
-       
-
     if(typeof employeesPlanning[index] != 'undefined') {
         let events = employeesPlanning[index].events;
         let recapString = '';
+        let fmtdName = employeesPlanning[index].name.replace(' ', '_');
+        let eventUID = fmtdName
+            +'_'
+            +employeesPlanning[index].events[0].start.format('YYYY_MM_DD')
+            +'_'
+            +employeesPlanning[index].events[events.length-1].start.format('YYYY_MM_DD');
+
+        let cal = ics(eventUID);
+        
 
         for (let j = 0; j < events.length; j++) {
             let event = events[j];
             cal.addEvent(companyName, 'Pause : '+event.pause+'min', event.etab, event.start.format('YYYY-MM-DD HH:mm'), event.end.format('YYYY-MM-DD HH:mm'));
         }
 
-        filename = employeesPlanning[index].name.replace(' ', '_')+'_calendar';
+        filename = fmtdName+'_calendar';
         cal.download(filename);
     }
 }
